@@ -1,2 +1,1 @@
-# snake
-Snake game project
+Simple snake game project.
