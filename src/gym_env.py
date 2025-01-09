@@ -1,7 +1,6 @@
 import gym
 from gym import spaces
 
-
 class gym_env(gym.Env):
     """
     OpenAI gym class to create the RL agent environment. In a first moment, 
@@ -37,7 +36,7 @@ class gym_env(gym.Env):
         It returns the observation from the environment.
         '''
         ...
-        return observation7
+        return observation
     
     def render(self, mode = 'human'):
         ...
