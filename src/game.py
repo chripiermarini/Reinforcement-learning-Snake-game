@@ -49,5 +49,45 @@ class SnakeEnv:
 
         pass
 
+    def change_direction(self, action, direction):
+        """
+        Method to avoid impossible action (repeated action or opposite direction)
+        We first check that, given a specific requested action, the snake is not already going
+        to the opposite direction, because the snake cannot perform 180° degrees direction changes.
+
+        """
+
+        if action == "UP" and direction != "DOWN":
+            direction = "UP"
+        if action == "DOWN" and direction != "UP":
+            direction = "DOWN"
+        if action == "RIGHT" and direction != "LEFT":
+            direction = "RIGHT"
+        if action == "LEFT" and direction != "RIGHT":
+            direction = "LEFT"
+
+        return direction
+
+    def move(self, direction, snake_pos):
+        """
+        The position of the snake can be defined through a list of two elements [x-axis, y-axis].
+        If we wanted to change direction, given that the playable space is defined through numerical values 
+        multiple of 10, we just impose 'pos[0] + 10' to tell the snake to go right,
+        'pos[0] - 10' to tell the snake to go left, etc.
+        Bear in mind that the zero is in the angle to the top left corner! 
+        Hence, to go down, you increase the pos[1].
+        """
+        
+        if direction == 'UP':
+            snake_pos[1] -= 10
+        if direction == 'DOWN':
+            snake_pos[1] += 10
+        if direction == 'LEFT':
+            snake_pos[0] -= 10
+        if direction == 'RIGHT':
+            snake_pos[0] += 10
+
+        return snake_pos
+
     def spawn_food(self):
         pass
