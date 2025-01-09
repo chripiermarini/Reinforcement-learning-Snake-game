@@ -71,23 +71,38 @@ class SnakeEnv:
     def move(self, direction, snake_pos):
         """
         The position of the snake can be defined through a list of two elements [x-axis, y-axis].
-        If we wanted to change direction, given that the playable space is defined through numerical values 
+        If we wanted to change direction, given that the playable space is defined through numerical values
         multiple of 10, we just impose 'pos[0] + 10' to tell the snake to go right,
         'pos[0] - 10' to tell the snake to go left, etc.
-        Bear in mind that the zero is in the angle to the top left corner! 
+        Bear in mind that the zero is in the angle to the top left corner!
         Hence, to go down, you increase the pos[1].
         """
-        
-        if direction == 'UP':
+
+        if direction == "UP":
             snake_pos[1] -= 10
-        if direction == 'DOWN':
+        if direction == "DOWN":
             snake_pos[1] += 10
-        if direction == 'LEFT':
+        if direction == "LEFT":
             snake_pos[0] -= 10
-        if direction == 'RIGHT':
+        if direction == "RIGHT":
             snake_pos[0] += 10
 
         return snake_pos
 
     def spawn_food(self):
-        pass
+        """
+        Spawn the food pixel into a random position in the playable field.
+        Each piece of food is ten pixel long, hence the " *10"
+        """
+        return [
+            random.randrange(1, (self.frame_size_x // 10)) * 10,
+            random.randrange(1, (self.frame_size_y // 10)) * 10,
+        ]
+
+    def eat(self):
+        """
+        The snake eats the food if the position of the head opf the snake is equal to the position of the food.
+        We check that and if True."""
+        return (self.snake_position[0] == self.food_position[0]) and (
+            self.snake_position[1] == self.food_position[1]
+        )
