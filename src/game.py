@@ -10,6 +10,9 @@ GREEN = pygame.Color(0, 255, 0)
 
 # setting game class
 class SnakeEnv:
+    """
+    Game environment initialization settings.
+    """
 
     def __init__(self, frame_size_x, frame_size_y):
 
@@ -106,3 +109,32 @@ class SnakeEnv:
         return (self.snake_position[0] == self.food_position[0]) and (
             self.snake_position[1] == self.food_position[1]
         )
+
+    def human_action(self, event):
+        """
+        Function that allows any human to input an action to telle the snake to go up,
+        down, left or right.
+        """
+        action = None
+
+        # quit the game
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        # actual action performed
+        elif event.type == pygame.KEYDOWN:
+
+            if event.key == pygame.K_UP:
+                action = "UP"
+            if event.key == pygame.K_DOWN:
+                action = "DOWN"
+            if event.key == pygame.K_LEFT:
+                action = "LEFT"
+            if event.key == pygame.K_RIGHT:
+                action = "RIGHT"
+
+            if event.key == pygame.K_ESCAPE:
+                pygame.event.post(pygame.event.Event(pygame.QUIT))
+
+        return action
