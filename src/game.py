@@ -138,3 +138,16 @@ class SnakeEnv:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
 
         return action
+    
+    def display_score(self, color, font, size):
+        """ 
+        Method that allow to print and see the score of the game.
+        """
+        
+        score_font = pygame.font.SysFont(font, size)
+        score_surface = score_font.render("Score: " +str(self.score), True, color)
+        
+        score_rect = score_surface.get_rect()
+        score_rect.midtop = (self.frame_size_x/10, 15) # top left corner
+        self.game_window.blit(score_surface, score_rect)
+        pass
