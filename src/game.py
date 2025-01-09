@@ -138,16 +138,66 @@ class SnakeEnv:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
 
         return action
-    
+
     def display_score(self, color, font, size):
-        """ 
+        """
         Method that allow to print and see the score of the game.
         """
-        
+
         score_font = pygame.font.SysFont(font, size)
-        score_surface = score_font.render("Score: " +str(self.score), True, color)
-        
+        score_surface = score_font.render("Score: " + str(self.score), True, color)
+
         score_rect = score_surface.get_rect()
-        score_rect.midtop = (self.frame_size_x/10, 15) # top left corner
+        score_rect.midtop = (self.frame_size_x / 10, 15)  # top left corner
         self.game_window.blit(score_surface, score_rect)
+
+        pass
+
+    def game_over(self):
+        """
+        Method that performs the game over, which can happen either if the snake touches the box of the window
+        or if the snake touches its own body.
+        The first condition arises if the head of the snake is in the same position of the window edges
+        The second condition happens if the snake head comes into contact
+        with any possible part of the snake (that is not the head, that is).
+        """
+
+        if (
+            self.snake_position[0] < 0
+            or self.snake_position[0] > self.frame_size_x - 10
+        ):
+            self.end_game()
+        if (
+            self.snake_position[1] < 0
+            or self.snake_position[1] > self.frame_size_y - 10
+        ):
+            self.end_game()
+
+        for block in self.snake_body[1:]:
+            if (
+                self.snake_position[0] == block[0]
+                and self.snake_position[1] == block[1]
+            ):
+                self.end_game()
+        pass
+
+    def end_game(self):
+        """
+        Prints the message that the game has ended, it comes up for four seconds, and then it ends the game.
+        """
+
+        # Prints the message
+        message = pygame.font.SysFont("arial", 45)
+        message_surface = message.render("Game has ended", True, RED)
+        message_rect = message_surface.get_rect()
+        message_rect.midtop = (self.frame_size_x / 2, self.frame_size_y / 4)
+
+        self.game_window.fill(BLACK)
+        self.game_window.blit(message_surface, message_rect)
+        self.display_score(RED, "times", 20)
+        pygame.display.flip()
+        time.sleep(4)
+        pygame.quit()
+        sys.exit()
+
         pass
