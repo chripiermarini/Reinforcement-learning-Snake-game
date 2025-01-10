@@ -1,17 +1,11 @@
 import pygame, sys, time, random
-from pygame.surfarray import array3d
-
-# setting colors
-BLACK = pygame.Color(0, 0, 0)
-WHITE = pygame.Color(255, 255, 255)
-RED = pygame.Color(255, 0, 0)
-GREEN = pygame.Color(0, 255, 0)
-
+from colors import *
 
 # setting game class
 class SnakeEnv:
     """
-    Game environment initialization settings.
+    Game environment that implements all the functions that are required to play
+    the game.
     """
 
     def __init__(self, frame_size_x, frame_size_y):
@@ -188,7 +182,7 @@ class SnakeEnv:
 
         # Prints the message
         message = pygame.font.SysFont("arial", 45)
-        message_surface = message.render("Game has ended", True, RED)
+        message_surface = message.render("Game over!", True, RED)
         message_rect = message_surface.get_rect()
         message_rect.midtop = (self.frame_size_x / 2, self.frame_size_y / 4)
 
