@@ -4,7 +4,6 @@ import pygame
 from colors import *
 from pygame.surfarray import array3d
 
-
 def main():
 
     # create the game
