@@ -3,3 +3,6 @@ pandas
 gym (from OpenAI)
 pygame
 setuptools
+tensorflow
+rl 
+PIL
